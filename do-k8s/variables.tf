@@ -5,7 +5,7 @@ variable "do_token" {
 variable "environment" {}
 
 variable "vpc_name" {
-  default = "vpc-${environment}"
+  default = "vpc-${var.environment}"
 }
 
 variable "region" {
@@ -13,7 +13,7 @@ variable "region" {
 }
 
 variable "k8s_name" {
-  default = "k8s-${environment}"
+  default = "k8s-${var.environment}"
 }
 
 variable "node_size" {
