@@ -12,6 +12,10 @@ variable "region" {
 
 variable "k8s_name" {}
 
+variable "version_prefix" {
+  default = "1.22."
+}
+
 variable "node_size" {
   default = "s-2vcpu-4gb"
 }
