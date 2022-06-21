@@ -1,6 +1,4 @@
-provider "digitalocean" {
-  token = var.do_token
-}
+provider "digitalocean" {}
 
 terraform {
   backend "local" {}
