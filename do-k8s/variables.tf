@@ -4,17 +4,13 @@ variable "do_token" {
 
 variable "environment" {}
 
-variable "vpc_name" {
-  default = "vpc-${var.environment}"
-}
+variable "vpc_name" {}
 
 variable "region" {
   default = "sfo2"
 }
 
-variable "k8s_name" {
-  default = "k8s-${var.environment}"
-}
+variable "k8s_name" {}
 
 variable "node_size" {
   default = "s-2vcpu-4gb"
