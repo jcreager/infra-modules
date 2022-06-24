@@ -1,7 +1,7 @@
 output "k8s_host" {
-  value = data.digital_ocean_kubernetes_cluster.do_k8s.endoint
+  value = digital_ocean_kubernetes_cluster.do_k8s.endoint
 }
 
 output "kube_config" {
- value = data.digital_ocean_kubernetes_cluster.do_k8s.kube_config[0]
+ value = digital_ocean_kubernetes_cluster.do_k8s.kube_config[0]
 }
