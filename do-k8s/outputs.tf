@@ -3,6 +3,6 @@ output "k8s_host" {
 }
 
 output "kube_config" {
- sensitive = true 
+ sensitive = true
  value = digitalocean_kubernetes_cluster.do_k8s.kube_config[0]
 }
