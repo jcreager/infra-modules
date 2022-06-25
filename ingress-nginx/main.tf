@@ -12,7 +12,7 @@
 provider "kubernetes" {
   host                   = var.k8s_host
   cluster_ca_certificate = base64decode(
-    var..cluster_ca_certificate
+    var.cluster_ca_certificate
   )
 
   exec {
