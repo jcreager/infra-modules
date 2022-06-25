@@ -17,7 +17,7 @@ terraform {
 }
 
 resource "helm_release" "ingress-nginx" {
-  name = var.site_name
+  name = "ingress-nginx" 
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart = "ingress-nginx"
   create_namespace = true
