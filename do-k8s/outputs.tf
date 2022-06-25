@@ -1,3 +1,7 @@
+output "id" {
+  value = digitalocean_kubernetes_cluster.do_k8s.id
+}
+
 output "k8s_host" {
   value = digitalocean_kubernetes_cluster.do_k8s.endpoint
 }
