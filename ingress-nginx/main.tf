@@ -8,7 +8,6 @@ provider "helm" {
 }
 
 terraform {
-  backend "s3" {}
   required_providers {
     kubernetes = {
       source = "hashicorp/helm"

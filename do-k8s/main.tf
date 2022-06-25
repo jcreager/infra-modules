@@ -1,7 +1,6 @@
 provider "digitalocean" {}
 
 terraform {
-  backend "s3" {}
   required_providers {
     digitalocean = {
       source = "digitalocean/digitalocean"
