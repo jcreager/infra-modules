@@ -64,10 +64,6 @@ resource "kubernetes_ingress_v1" "wordpress" {
       hosts = [var.site_hostname]
       secret_name = "${var.site_name}-tls"
     }
-    backend {
-      service_name = "${var.site_name}-wordpress"
-      service_port = 8080
-    }
     rule {
       host = var.site_hostname
       http {
