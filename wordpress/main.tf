@@ -69,9 +69,11 @@ resource "kubernetes_ingress_v1" "wordpress" {
       http {
         path {
           backend {
-            name = "${var.site_name}-wordpress"
-            port {
-              number = 8080
+            service {
+              name = "${var.site_name}-wordpress"
+              port {
+                number = 8080
+              }
             }
           }
           path = "/"
