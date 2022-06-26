@@ -57,7 +57,7 @@ resource "kubernetes_ingress_v1" "wordpress" {
       "kubernetes.io/ingress.global-static-ip-name:" = "167.172.8.60"
       "kubernetes.io/ingress.class" = "nginx"
       "nginx.ingress.kubernetes.io/proxy-body-size" = "1024m"
-      "cert-manager.io/cluster-issuer" = "letsencrypt"
+      "cert-manager.io/cluster-issuer" = "letsencrypt-prod"
     }
   }
   spec {

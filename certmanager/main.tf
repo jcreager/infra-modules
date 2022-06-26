@@ -13,6 +13,35 @@ terraform {
   }
 }
 
+resource "kubernetes_manifest" "clusterissuer_letsencrypt_prod" {
+  manifest = {
+    "apiVersion" = "cert-manager.io/v1alpha2"
+    "kind" = "ClusterIssuer"
+    "metadata" = {
+      "name" = "letsencrypt-prod"
+    }
+    "spec" = {
+      "acme" = {
+        "email" = "josephcreager@gmail.com"
+        "privateKeySecretRef" = {
+          "name" = "letsencrypt-prod"
+        }
+        "server" = "https://acme-v02.api.letsencrypt.org/directory"
+        "solvers" = [
+          {
+            "http01" = {
+              "ingress" = {
+                "class" = "nginx"
+              }
+            }
+          },
+        ]
+      }
+    }
+  }
+}
+
+
 resource "helm_release" "certmanager" {
   skip_crds = false
   name = "cert-manager"
