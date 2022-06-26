@@ -1,14 +1,3 @@
-#provider "helm" {
-#  kubernetes {
-#    load_config_file = false
-#    host                   = var.k8s_host
-#    #client_certificate     = base64decode(var.client_certificate)
-#    #client_key             = base64decode(var.client_key)
-#    token                  = base64decode(var.k8s_token)
-#    cluster_ca_certificate = base64decode(var.cluster_ca_certificate)
-#  }
-#}
-
 provider "helm" {
   kubernetes {
     config_path = "~/.kube/config"
