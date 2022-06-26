@@ -68,4 +68,8 @@ resource "helm_release" "wordpress" {
     name = "ingress.tls"
     value = true
   }
+  set {
+    name = "service.type"
+    value = "ClusterIP"
+  }
 }
