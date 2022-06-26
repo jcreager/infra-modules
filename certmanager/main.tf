@@ -14,7 +14,7 @@ terraform {
 }
 
 resource "helm_release" "certmanager" {
-  name = var.site_name
+  name = cert-manager
   repository = "https://charts.jetstack.io"
   chart = "jetstack/cert-manager"
   create_namespace = true
