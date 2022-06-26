@@ -14,6 +14,7 @@ terraform {
 }
 
 resource "helm_release" "certmanager" {
+  skip_crds = false
   name = "cert-manager"
   repository = "https://charts.jetstack.io"
   chart = "cert-manager"
