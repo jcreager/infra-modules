@@ -54,6 +54,7 @@ resource "helm_release" "wordpress" {
         key = "wp_username"
       }
     }
+  }
   set {
     name = "wordpressPassword"
     value_from {
