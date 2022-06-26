@@ -19,4 +19,11 @@ resource "helm_release" "certmanager" {
   repository = "https://charts.jetstack.io"
   chart = "cert-manager"
   create_namespace = true
+  values = [
+    yamlencode(
+      {
+        installCRDs = true
+      }
+    )
+  ]
 }
