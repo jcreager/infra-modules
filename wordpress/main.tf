@@ -47,10 +47,6 @@ resource "helm_release" "wordpress" {
     name = "wordpressConfigureCache"
     value = true
   }
-  set {
-    name = "installCRDs"
-    value = true
-  }
 }
 
 resource "kubernetes_ingress_v1" "wordpress" {
