@@ -54,7 +54,7 @@ resource "kubernetes_ingress_v1" "wordpress" {
     name      = "${var.site_name}-ingress"
     namespace = "default"
     annotations = {
-      "kubernetes.io/ingress.global-static-ip-name:" = "167.172.8.60"
+      "kubernetes.io/ingress.global-static-ip-name" = "167.172.8.60"
       "kubernetes.io/ingress.class" = "nginx"
       "nginx.ingress.kubernetes.io/proxy-body-size" = "1024m"
       "cert-manager.io/cluster-issuer" = "letsencrypt-prod"
