@@ -21,7 +21,23 @@ terraform {
   }
 }
 
+resource "helm_release" "certmanager" {
+  skip_crds = false
+  name = "cert-manager"
+  repository = "https://charts.jetstack.io"
+  chart = "cert-manager"
+  create_namespace = true
+  values = [
+    yamlencode(
+      {
+        installCRDs = true
+      }
+    )
+  ]
+}
+
 resource "kubernetes_manifest" "clusterissuer_letsencrypt_prod" {
+  depends_on = [helm_relase.certmanager]
   manifest = {
     "apiVersion" = "cert-manager.io/v1"
     "kind" = "ClusterIssuer"
@@ -47,21 +63,4 @@ resource "kubernetes_manifest" "clusterissuer_letsencrypt_prod" {
       }
     }
   }
-  depends_on = [helm_relase.certmanager]
-}
-
-
-resource "helm_release" "certmanager" {
-  skip_crds = false
-  name = "cert-manager"
-  repository = "https://charts.jetstack.io"
-  chart = "cert-manager"
-  create_namespace = true
-  values = [
-    yamlencode(
-      {
-        installCRDs = true
-      }
-    )
-  ]
 }
