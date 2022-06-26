@@ -43,5 +43,5 @@ resource "digitalocean_project" "do_project" {
   description = var.project_description
   purpose = var.project_purpose
   environment = var.environment
-  resources = [digitalocean_vpc.do_vpc.urn, digitalocean_kubernetes_cluster.do_k8s.urn]
+  resources = [digitalocean_kubernetes_cluster.do_k8s.urn]
 }
