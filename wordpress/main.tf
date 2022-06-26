@@ -62,7 +62,7 @@ resource "kubernetes_ingress" "wordpress" {
   spec {
     tls {
       hosts = [var.site_hostname]
-      secret_name = var.tls_secret
+      secret_name = "${var.site_name}-tls"
     }
     backend {
       service_name = "${var.site_name}-wordpress"
