@@ -56,7 +56,7 @@ resource "kubernetes_ingress_v1" "wordpress" {
     annotations = {
       "kubernetes.io/ingress.class" = "nginx"
       "nginx.ingress.kubernetes.io/proxy-body-size" = "1024m"
-      "cert-manager.io/cluster-issuer" = "letsencrypt-prod"
+      "cert-manager.io/cluster-issuer" = "letsencrypt"
     }
   }
   spec {
