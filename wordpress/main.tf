@@ -62,7 +62,7 @@ resource "kubernetes_ingress_v1" "wordpress" {
   spec {
     tls {
       hosts = [var.site_hostname]
-      secret_name = "${var.site_name}-tls"
+      secret_name = "${var.site_name}-tls-dbmwv"
     }
     rule {
       host = var.site_hostname
