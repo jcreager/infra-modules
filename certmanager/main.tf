@@ -4,11 +4,19 @@ provider "helm" {
   }
 }
 
+provider "kubernetes" {
+  config_path = "~/.kube/config"
+}
+
 terraform {
   required_providers {
     kubernetes = {
       source = "hashicorp/helm"
       version = "~>2.6"
+    }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "~>2.11.0"
     }
   }
 }
