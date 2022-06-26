@@ -58,11 +58,11 @@ resource "helm_release" "wordpress" {
   }
   set {
     name = "ingress.extraHosts"
-    value = var.site_extra_hostnames
+    value = "{${join(",", var.site_extra_hostnames)}}"
   }
   set {
     name = "ingress.extraTls"
-    value = var.site_extra_hostnames
+    value = "{${join(",", var.site_extra_hostnames)}}"
   }
   set {
     name = "ingress.tls"
