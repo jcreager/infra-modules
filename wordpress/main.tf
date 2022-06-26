@@ -26,7 +26,6 @@ terraform {
   }
 }
 
-
 resource "random_password" "wordpress_password" {
   length = 32
 }
@@ -48,40 +47,38 @@ resource "helm_release" "wordpress" {
     name = "wordpressConfigureCache"
     value = true
   }
-  set {
-    name = "ingress.enabled"
-    value = true
+}
+
+resource "kubernetes_ingress" "wordpress" {
+  metadata {
+    name      = "${var.site_name}-ingress"
+    namespace = "default"
+    annotations = {
+      "kubernetes.io/ingress.class" = "nginx"
+      "nginx.ingress.kubernetes.io/proxy-body-size" = "1024m"
+      "cert-manager.io/cluster-issuer" = "letsencrypt-prod"
+    }
   }
-  set {
-    name = "ingress.hostname"
-    value = var.site_hostname
-  }
-  #set {
-  #  name = "ingress.extraHosts"
-  #  value = "{${join(",", var.site_extra_hostnames)}}"
-  #}
-  #set {
-  #  name = "ingress.extraTls"
-  #  value = "{${join(",", var.site_extra_hostnames)}}"
-  #}
-  set {
-    name = "ingress.tls"
-    value = true
-  }
-  set {
-    name = "service.type"
-    value = "ClusterIP"
-  }
-  set {
-    name = "ingress.certManager"
-    value = true
-  }
-  set {
-    name = "ingress.annotations\".kubernetes\\.io/ingress\\.class\""
-    value = "nginx"
-  }
-  set {
-    name = "ingress.annotations\".cert-manager\\.io/cluster-issuer\""
-    value = "letsencrypt-prod"
+  spec {
+    tls {
+      hosts = [var.site_hostname]
+      secret_name = var.tls_secret
+    }
+    backend {
+      service_name = "${var.site-name}-wordpress"
+      service_port = 8080
+    }
+    rule {
+      host = var.site_hostname
+      http {
+        path {
+          backend {
+            service_name = "${var.site-name}-wordpress"
+            service_port = 8080
+          }
+          path = "/"
+        }
+      }
+    }
   }
 }
