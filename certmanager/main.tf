@@ -23,7 +23,7 @@ terraform {
 
 resource "kubernetes_manifest" "clusterissuer_letsencrypt_prod" {
   manifest = {
-    "apiVersion" = "cert-manager.io/v1alpha2"
+    "apiVersion" = "cert-manager.io/v1"
     "kind" = "ClusterIssuer"
     "metadata" = {
       "name" = "letsencrypt-prod"
@@ -47,6 +47,7 @@ resource "kubernetes_manifest" "clusterissuer_letsencrypt_prod" {
       }
     }
   }
+  depends_on = [helm_relase.certmanager]
 }
 
 
