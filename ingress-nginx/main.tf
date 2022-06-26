@@ -11,17 +11,7 @@
 
 provider "helm" {
   kubernetes {
-    host                   = var.k8s_host
-    cluster_ca_certificate = base64decode(
-      var.cluster_ca_certificate
-    )
-
-    exec {
-      api_version = "client.authentication.k8s.io/v1beta1"
-      command     = "doctl"
-      args = ["kubernetes", "cluster", "kubeconfig", "exec-credential",
-      "--version=v1beta1", var.kube_cluster]
-    }
+    config_path = "~/.kube/config"
   }
 }
 
