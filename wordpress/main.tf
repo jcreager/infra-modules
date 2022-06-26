@@ -31,16 +31,6 @@ resource "random_password" "wordpress_password" {
   length = 32
 }
 
-resource "kubernetes_secret" "wordpress" {
-  metadata {
-    name = "${var.site_name}-secrets"
-  }
-  data = {
-    wp_username = "admin"
-    wp_password = random_password.wordpress_password.result
-  }
-}
-
 resource "helm_release" "wordpress" {
   name = var.site_name
   repository = "https://charts.bitnami.com/bitnami"
@@ -48,21 +38,11 @@ resource "helm_release" "wordpress" {
   create_namespace = true
   set {
     name = "wordpressUsername"
-    value_from {
-      secret_key_ref {
-        name = kubernetes_secret.wordpress.metadata.name
-        key = "wp_username"
-      }
-    }
+    value = "admin"
   }
   set {
     name = "wordpressPassword"
-    value_from {
-      secret_key_ref {
-        name = kubernetes_secret.wordpress.metadata.name
-        key = "wp_password"
-      }
-    }
+    value = random_password.wordpress_password.result
   }
   set {
     name = "wordpressConfigureCache"
