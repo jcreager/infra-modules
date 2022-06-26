@@ -37,7 +37,7 @@ resource "helm_release" "certmanager" {
 }
 
 resource "kubernetes_manifest" "clusterissuer_letsencrypt_prod" {
-  depends_on = [helm_relase.certmanager]
+  depends_on = [helm_release.certmanager]
   manifest = {
     "apiVersion" = "cert-manager.io/v1"
     "kind" = "ClusterIssuer"
