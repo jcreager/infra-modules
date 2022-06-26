@@ -49,7 +49,7 @@ resource "helm_release" "wordpress" {
   }
 }
 
-resource "kubernetes_ingress" "wordpress" {
+resource "kubernetes_ingress_v1" "wordpress" {
   metadata {
     name      = "${var.site_name}-ingress"
     namespace = "default"
