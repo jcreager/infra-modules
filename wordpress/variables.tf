@@ -1,0 +1,1 @@
+variable "site_name" {}
