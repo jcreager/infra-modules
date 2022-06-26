@@ -72,4 +72,10 @@ resource "helm_release" "wordpress" {
     name = "service.type"
     value = "ClusterIP"
   }
+  set {
+  }
+  set {
+    name = "ingress.annotations"
+    value = "{cert-manager.io/cluster-issuer: \"letsencrypt\"}"
+  }
 }
