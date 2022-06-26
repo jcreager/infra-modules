@@ -65,7 +65,7 @@ resource "kubernetes_ingress" "wordpress" {
       secret_name = var.tls_secret
     }
     backend {
-      service_name = "${var.site-name}-wordpress"
+      service_name = "${var.site_name}-wordpress"
       service_port = 8080
     }
     rule {
@@ -73,7 +73,7 @@ resource "kubernetes_ingress" "wordpress" {
       http {
         path {
           backend {
-            service_name = "${var.site-name}-wordpress"
+            service_name = "${var.site_name}-wordpress"
             service_port = 8080
           }
           path = "/"
