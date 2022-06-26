@@ -33,7 +33,7 @@ resource "random_password" "wordpress_password" {
 
 resource "kubernetes_secret" "wordpress" {
   metadata {
-    name = "${var.site-name}-secrets"
+    name = "${var.site_name}-secrets"
   }
   data = {
     wp_username = "admin"
@@ -77,6 +77,10 @@ resource "helm_release" "wordpress" {
   }
   set {
     name = "ingress.extraHosts"
+    value = var.site_extra_hostnames
+  }
+  set {
+    name = "ingress.extraTls"
     value = var.site_extra_hostnames
   }
   set {
