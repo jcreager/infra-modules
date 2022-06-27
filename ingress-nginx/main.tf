@@ -23,7 +23,7 @@ resource "helm_release" "ingress-nginx" {
     value = "Local"
   }
   set {
-    name = "controller.service.annotations.service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol"
-    value = "true"
+    name = "controller.service.annotations"
+    value = "{service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: \"true\"}"
   }
 }
