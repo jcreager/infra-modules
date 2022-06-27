@@ -33,3 +33,8 @@ variable "project_name" {}
 variable "project_description" {}
 
 variable "project_purpose" {}
+
+variable "extra_resources" {
+  description = "A list of other resources to track in the project."
+  default = []
+}
