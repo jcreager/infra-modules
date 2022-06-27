@@ -18,7 +18,6 @@ resource "helm_release" "kube-prometheus-stack" {
   repository = "https://prometheus-community.github.io/helm-charts"
   chart = "kube-prometheus-stack"
   create_namespace = true
-  skip_crds = true
   set {
     name = "grafana.ingress.enbled"
     value = true
