@@ -48,7 +48,7 @@ resource "kubernetes_manifest" "configmap_wordpress" {
       "labels" = {
         "app" = "wordpress"
       }
-      "name" = "wordpress"
+      "name" = "php-ini"
       "namespace" = "default"
     }
   }
