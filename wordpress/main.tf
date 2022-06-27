@@ -48,7 +48,7 @@ resource "kubernetes_manifest" "configmap_wordpress" {
       "labels" = {
         "app" = "wordpress"
       }
-      "name" = "php-ini"
+      "name" = "${var.site_name}-php-ini"
       "namespace" = "default"
     }
   }
@@ -64,7 +64,7 @@ resource "helm_release" "wordpress" {
       {
         "extraVolumeMounts" = [
           {
-            name = "php-ini"
+            name = "${var.site_name}-php-ini"
             "mountPath" = "/opt/bitnami/php/etc/conf.d"
           }
         ]
@@ -76,7 +76,7 @@ resource "helm_release" "wordpress" {
           {
             name = "php-ini"
             "configMap" = {
-              name = "php-ini"
+              name = "${var.site_name}-php-ini"
             }
           }
         ]
