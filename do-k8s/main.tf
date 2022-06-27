@@ -43,5 +43,5 @@ resource "digitalocean_project" "do_project" {
   description = var.project_description
   purpose = var.project_purpose
   environment = var.environment
-  resources = concat([digitalocean_kubernetes_cluster.do_k8s.urn], var.extra_resources)
+  resources = concat(sort([digitalocean_kubernetes_cluster.do_k8s.urn]), sort(var.extra_resources))
 }
