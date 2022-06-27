@@ -74,7 +74,7 @@ resource "helm_release" "wordpress" {
       {
         "extraVolumes" = [
           {
-            name = "php-ini"
+            name = "${var.site_name}-php-ini"
             "configMap" = {
               name = "${var.site_name}-php-ini"
             }
