@@ -77,7 +77,7 @@ resource "kubernetes_ingress_v1" "wordpress" {
             service {
               name = "${var.site_name}-wordpress"
               port {
-                number = 8080
+                number = 80
               }
             }
           }
