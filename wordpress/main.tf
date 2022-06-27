@@ -47,6 +47,10 @@ resource "helm_release" "wordpress" {
     name = "wordpressConfigureCache"
     value = true
   }
+  set {
+    name = "service.type"
+    value = "ClusterIP"
+  }
 }
 
 resource "kubernetes_ingress_v1" "wordpress" {
