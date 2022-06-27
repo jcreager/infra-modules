@@ -18,4 +18,20 @@ resource "helm_release" "ingress-nginx" {
   repository = "https://prometheus-community.github.io/helm-charts"
   chart = "kube-prometheus-stack"
   create_namespace = true
+  set {
+    name = "grafana.ingress.enbled"
+    value = true
+  }
+  set {
+    name = "grafana.ingress.hosts.0"
+    value = var.grafana_host
+  }
+  set {
+    name = "grafana.ingress.tls.0.secretName"
+    value = var.tls_secret_name
+  }
+  set {
+    name = "grafana.ingress.tls.0.hosts.0"
+    value = var.grafana_host
+  }
 }
