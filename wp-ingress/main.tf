@@ -33,7 +33,7 @@ resource "kubernetes_ingress_v1" "wordpress" {
         path {
           backend {
             service {
-              name = "${var.site_name}-wordpress"
+              name = "${var.refers_to}-wordpress"
               port {
                 number = 80
               }
