@@ -19,20 +19,18 @@ resource "helm_release" "kube-prometheus-stack" {
   chart = "kube-prometheus-stack"
   create_namespace = true
   skip_crds = true
-  set {
-    name = "grafana.ingress.enbled"
-    value = true
-  }
-  set {
-    name = "grafana.ingress.hosts.0"
-    value = var.grafana_host
-  }
-  set {
-    name = "grafana.ingress.tls.0.secretName"
-    value = var.tls_secret_name
-  }
-  set {
-    name = "grafana.ingress.tls.0.hosts.0"
-    value = var.grafana_host
-  }
+  values = [
+    yamlencode(
+      {
+        ingress.enabled = true
+        hosts = [var.grafana_host]
+        tls = [
+          {
+            secretName = var.tls_secret_name
+            hosts = [var.grafana_host]
+          }
+        ]
+      }
+    )
+  ]
 }
