@@ -22,12 +22,12 @@ resource "helm_release" "kube-prometheus-stack" {
   values = [
     yamlencode(
       {
-        ingress.enabled = true
-        hosts = [var.grafana_host]
-        tls = [
+        "ingress.enabled" = true
+        "hosts" = [var.grafana_host]
+        "tls" = [
           {
-            secretName = var.tls_secret_name
-            hosts = [var.grafana_host]
+            "secretName" = var.tls_secret_name
+            "hosts" = [var.grafana_host]
           }
         ]
       }
