@@ -28,16 +28,18 @@ resource "helm_release" "ingress-nginx" {
   create_namespace = true
   values = [
     yamlencode(
-      "controller" = {
-        "service" = {
-          "ports" = [
-            {
-              name        = "monitoring"
-              protocol    = "TCP"
-              port        = 10254
-              target_port = "10254"
-            }
-          ]
+      {
+        "controller" = {
+          "service" = {
+            "ports" = [
+              {
+                name        = "monitoring"
+                protocol    = "TCP"
+                port        = 10254
+                target_port = "10254"
+              }
+            ]
+          }
         }
       }
     )
