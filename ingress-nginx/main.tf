@@ -34,6 +34,7 @@ resource "helm_release" "ingress-nginx" {
             "labels" = {
               "monitoring" = "prometheus-ingress-nginx"
             }
+            "externalTrafficPolicy" = "Local"
           }
         }
       }
