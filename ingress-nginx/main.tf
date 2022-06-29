@@ -26,6 +26,17 @@ resource "helm_release" "ingress-nginx" {
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart = "ingress-nginx"
   create_namespace = true
+  values = [
+    yamlencode(
+      "controller" = {
+        "service" = {
+          "labels" = {
+            "monitoring" = "prometheus-ingress-nginx"
+          }
+        }
+      }
+    )
+  ]
   set {
     name = "controller.service.metrics.enabled"
     value = "true"
@@ -46,8 +57,8 @@ resource "helm_release" "ingress-nginx" {
     name = "controller.config.use-proxy-protocol"
     value = "true"
   }
-  set {
-    name = "controller.service.labels.monitoring"
-    value = "prometheus-ingress-nginx"
-  }
+  #set {
+  #  name = "controller.service.labels.monitoring"
+  #  value = "prometheus-ingress-nginx"
+  #}
 }
