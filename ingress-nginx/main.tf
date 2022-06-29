@@ -21,28 +21,32 @@ terraform {
   }
 }
 
+resource "kubernetes_service" "ingress_nginx_metrics" {
+  metadata {
+    name = "ingress-nginx-metrics"
+    labels = {
+      monitoring = "prometheus-ingress-nginx"
+    }
+  }
+
+  spec {
+    port {
+      port = 10254
+      target_port = 10254
+    }
+  }
+  selector = {
+    "app.kubernetes.io/component" = "controller"
+    "app.kubernetes.io/instance" =  "ingress-nginx"
+    "app.kubernetes.io/name" = "ingress-nginx"
+  }
+}
+
 resource "helm_release" "ingress-nginx" {
   name = "ingress-nginx"
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart = "ingress-nginx"
   create_namespace = true
-  values = [
-    yamlencode(
-      {
-        "controller" = {
-          "podAnnotations" = {
-            "prometheus.io/scrape" = "true"
-            "prometheus.io/port" = "10254"
-          }
-          "service" = {
-            "labels" = {
-              "monitoring" = "prometheus-ingress-nginx"
-            }
-          }
-        }
-      }
-    )
-  ]
   set {
     name = "controller.service.metrics.enabled"
     value = "true"
@@ -63,8 +67,4 @@ resource "helm_release" "ingress-nginx" {
     name = "controller.config.use-proxy-protocol"
     value = "true"
   }
-  #set {
-  #  name = "controller.service.labels.monitoring"
-  #  value = "prometheus-ingress-nginx"
-  #}
 }
