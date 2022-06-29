@@ -26,24 +26,35 @@ resource "helm_release" "ingress-nginx" {
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart = "ingress-nginx"
   create_namespace = true
-  values = [
-    yamlencode(
+  #values = [
+  #  yamlencode(
+  #    {
+  #      "controller" = {
+  #        "service" = {
+  #          "ports" = [
+  #            {
+  #              name        = "monitoring"
+  #              protocol    = "TCP"
+  #              port        = 10254
+  #              target_port = "10254"
+  #            }
+  #          ]
+  #        }
+  #      }
+  #    }
+  #  )
+  #]
+  set {
+    name = "controller.service.ports.2"
+    value = jsonencode(
       {
-        "controller" = {
-          "service" = {
-            "ports" = [
-              {
-                name        = "monitoring"
-                protocol    = "TCP"
-                port        = 10254
-                target_port = "10254"
-              }
-            ]
-          }
-        }
+        name        = "monitoring"
+        protocol    = "TCP"
+        port        = 10254
+        target_port = "10254"
       }
     )
-  ]
+  }
   set {
     name = "controller.service.externalTrafficPolicy"
     value = "Local"
