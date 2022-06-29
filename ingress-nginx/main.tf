@@ -64,10 +64,12 @@ resource "kubernetes_manifest" "servicemonitor_kube_prometheus_stack_alertmanage
       "namespace" = "default"
     }
     "spec" = {
-      "endpoints" = {
-        "port" = "monitoring"
-        "interval" = "10s"
-      }
+      "endpoints" = [
+        {
+          "port" = "monitoring"
+          "interval" = "10s"
+        }
+      ]
       "namespaceSelector" = {
         "matchNames" = [
           "default",
