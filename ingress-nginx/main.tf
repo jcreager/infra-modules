@@ -34,11 +34,11 @@ resource "kubernetes_service" "ingress_nginx_metrics" {
       port = 10254
       target_port = 10254
     }
-  }
-  selector = {
-    "app.kubernetes.io/component" = "controller"
-    "app.kubernetes.io/instance" =  "ingress-nginx"
-    "app.kubernetes.io/name" = "ingress-nginx"
+    selector = {
+      "app.kubernetes.io/component" = "controller"
+      "app.kubernetes.io/instance" =  "ingress-nginx"
+      "app.kubernetes.io/name" = "ingress-nginx"
+    }
   }
 }
 
