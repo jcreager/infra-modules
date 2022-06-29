@@ -12,6 +12,6 @@ resource "kubernetes_config_map" "ingress_nginx" {
   }
 
   data = {
-    "app-status.json" = file("./dashboars/kubernetes-ingress-nginx_rev2.json")
+    "app-status.json" = file("dashboars/kubernetes-ingress-nginx_rev2.json")
   }
 }
