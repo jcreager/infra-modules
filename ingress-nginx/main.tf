@@ -26,24 +26,6 @@ resource "helm_release" "ingress-nginx" {
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart = "ingress-nginx"
   create_namespace = true
-  #values = [
-  #  yamlencode(
-  #    {
-  #      "controller" = {
-  #        "service" = {
-  #          "ports" = [
-  #            {
-  #              name        = "monitoring"
-  #              protocol    = "TCP"
-  #              port        = 10254
-  #              target_port = "10254"
-  #            }
-  #          ]
-  #        }
-  #      }
-  #    }
-  #  )
-  #]
   set {
     name = "controller.service.ports.2"
     value = jsonencode(
@@ -82,6 +64,10 @@ resource "kubernetes_manifest" "servicemonitor_kube_prometheus_stack_alertmanage
       "namespace" = "default"
     }
     "spec" = {
+      "endpoints" = {
+        "port" = "monitoring"
+        "interval" = "10s"
+      }
       "namespaceSelector" = {
         "matchNames" = [
           "default",
