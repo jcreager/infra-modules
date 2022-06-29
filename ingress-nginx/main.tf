@@ -30,4 +30,8 @@ resource "helm_release" "ingress-nginx" {
     name = "controller.config.use-proxy-protocol"
     value = "true"
   }
+  set {
+    name = "controller.service.monitoring"
+    value = "prometheus"
+  }
 }
