@@ -27,15 +27,12 @@ resource "helm_release" "ingress-nginx" {
   chart = "ingress-nginx"
   create_namespace = true
   set {
-    name = "controller.service.ports.2"
-    value = jsonencode(
-      {
-        name        = "monitoring"
-        protocol    = "TCP"
-        port        = 10254
-        target_port = "10254"
-      }
-    )
+    name = "controller.service.metrics.enabled"
+    value = "true"
+  }
+  set {
+    name = "controller.service.metrics.serviceMonitor.enabled"
+    value = "true"
   }
   set {
     name = "controller.service.externalTrafficPolicy"
@@ -54,33 +51,3 @@ resource "helm_release" "ingress-nginx" {
     value = "prometheus-ingress-nginx"
   }
 }
-
-resource "kubernetes_manifest" "servicemonitor_kube_prometheus_stack_alertmanager" {
-  manifest = {
-    "apiVersion" = "monitoring.coreos.com/v1"
-    "kind" = "ServiceMonitor"
-    "metadata" = {
-      "name" = "ignress-service-monitor"
-      "namespace" = "default"
-    }
-    "spec" = {
-      "endpoints" = [
-        {
-          "port" = "monitoring"
-          "interval" = "10s"
-        }
-      ]
-      "namespaceSelector" = {
-        "matchNames" = [
-          "default",
-        ]
-      }
-      "selector" = {
-        "matchLabels" = {
-          "monitoring" = "prometheus-ingress-nginx"
-        }
-      }
-    }
-  }
-}
-
