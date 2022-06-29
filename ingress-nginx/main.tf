@@ -42,6 +42,39 @@ resource "kubernetes_service" "ingress_nginx_metrics" {
   }
 }
 
+resource "kubernetes_manifest" "servicemonitor_kube_prometheus_stack_alertmanager" {
+  manifest = {
+    "apiVersion" = "monitoring.coreos.com/v1"
+    "kind" = "ServiceMonitor"
+    "metadata" = {
+      "labels" = {
+        "app" = "ingress-nginx"
+      }
+      "name" = "ingress-nginx"
+      "namespace" = "default"
+    }
+    "spec" = {
+      "endpoints" = [
+        {
+          "path" = "/metrics"
+          "port" = 10254
+        },
+      ]
+      "namespaceSelector" = {
+        "matchNames" = [
+          "default",
+        ]
+      }
+      "selector" = {
+        "matchLabels" = {
+          "monitoring" = "promtheus-ingress-nginx"
+        }
+      }
+    }
+  }
+}
+
+
 resource "helm_release" "ingress-nginx" {
   name = "ingress-nginx"
   repository = "https://kubernetes.github.io/ingress-nginx"
