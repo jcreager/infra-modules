@@ -27,7 +27,7 @@ resource "helm_release" "ingress-nginx" {
   chart = "ingress-nginx"
   create_namespace = true
   set {
-    name = "controller.service.ports"
+    name = "controller.service.ports.2"
     value = jsonencode(
       {
         name        = "monitoring"
