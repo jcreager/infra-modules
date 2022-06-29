@@ -28,10 +28,12 @@ resource "helm_release" "ingress-nginx" {
   create_namespace = true
   values = [
     yamlencode(
-      "controller" = {
-        "service" = {
-          "labels" = {
-            "monitoring" = "prometheus-ingress-nginx"
+      {
+        "controller" = {
+          "service" = {
+            "labels" = {
+              "monitoring" = "prometheus-ingress-nginx"
+            }
           }
         }
       }
