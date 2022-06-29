@@ -5,7 +5,6 @@ provider "kubernetes" {
 resource "kubernetes_config_map" "ingress_nginx" {
   metadata {
     name      = "grafana-dashboards-ingress-nginx-1"
-    namespace = var.namespace
 
     labels = {
       grafana_dashboard = 1
