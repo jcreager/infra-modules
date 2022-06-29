@@ -30,11 +30,14 @@ resource "helm_release" "ingress-nginx" {
     yamlencode(
       {
         "controller" = {
+          "podAnnotations" = {
+            "prometheus.io/scrape" = "true"
+            "prometheus.io/port" = "10254"
+          }
           "service" = {
             "labels" = {
               "monitoring" = "prometheus-ingress-nginx"
             }
-            "externalTrafficPolicy" = "Local"
           }
         }
       }
