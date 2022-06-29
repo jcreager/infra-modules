@@ -26,6 +26,20 @@ resource "helm_release" "ingress-nginx" {
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart = "ingress-nginx"
   create_namespace = true
+  values = [
+    yamlencode(
+      controller {
+        service {
+          port {
+            name        = "monitoring"
+            protocol    = "TCP"
+            port        = 10254
+            target_port = "10254"
+          }
+        }
+      }
+    )
+  ]
   set {
     name = "controller.service.externalTrafficPolicy"
     value = "Local"
@@ -39,7 +53,7 @@ resource "helm_release" "ingress-nginx" {
     value = "true"
   }
   set {
-    name = "controller.service.monitoring"
+    name = "controller.service.labels.monitoring"
     value = "prometheus-ingress-nginx"
   }
 }
