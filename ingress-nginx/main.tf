@@ -32,6 +32,30 @@ resource "helm_release" "ingress-nginx" {
   }
   set {
     name = "controller.service.monitoring"
-    value = "prometheus"
+    value = "prometheus-ingress-nginx"
   }
 }
+
+resource "kubernetes_manifest" "servicemonitor_kube_prometheus_stack_alertmanager" {
+  manifest = {
+    "apiVersion" = "monitoring.coreos.com/v1"
+    "kind" = "ServiceMonitor"
+    "metadata" = {
+      "name" = "ignress-service-monitor"
+      "namespace" = "default"
+    }
+    "spec" = {
+      "namespaceSelector" = {
+        "matchNames" = [
+          "default",
+        ]
+      }
+      "selector" = {
+        "matchLabels" = {
+          "monitoring" = "prometheus-ingress-nginx"
+        }
+      }
+    }
+  }
+}
+
