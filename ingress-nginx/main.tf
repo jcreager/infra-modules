@@ -42,7 +42,7 @@ resource "kubernetes_service" "ingress_nginx_metrics" {
   }
 }
 
-resource "kubernetes_manifest" "servicemonitor_kube_prometheus_stack_alertmanager" {
+resource "kubernetes_manifest" "ingress_nginx" {
   manifest = {
     "apiVersion" = "monitoring.coreos.com/v1"
     "kind" = "ServiceMonitor"
