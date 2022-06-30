@@ -26,12 +26,12 @@ resource "kubernetes_service" "ingress_nginx_metrics" {
     name = "ingress-nginx-metrics"
     labels = {
       monitoring = "prometheus-ingress-nginx"
-      "jobLabel" = "ingress-nginx"
     }
   }
 
   spec {
     port {
+      name = "metrics"
       port = 10254
       target_port = 10254
     }
@@ -50,15 +50,16 @@ resource "kubernetes_manifest" "ingress_nginx" {
     "metadata" = {
       "labels" = {
         "app" = "ingress-nginx"
+        #"jobLabel" = "ingress-nginx"
       }
-      "name" = "ingress-nginx"
+      "name" = "ingress-nginx-metrics"
       "namespace" = "default"
     }
     "spec" = {
       "endpoints" = [
         {
           "path" = "/metrics"
-          "port" = 10254
+          "port" = "metrics"
           "scheme" = "http"
         },
       ]
