@@ -60,12 +60,12 @@ resource "kubernetes_manifest" "ingress_nginx" {
         {
           "path" = "/metrics"
           "port" = "metrics"
-          "scheme" = "http"
         },
       ]
       "selector" = {
         "matchLabels" = {
           "monitoring" = "prometheus-ingress-nginx"
+          "self-monitor" = "true"
         }
       }
     }
