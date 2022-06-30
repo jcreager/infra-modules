@@ -26,6 +26,7 @@ resource "kubernetes_service" "ingress_nginx_metrics" {
     name = "ingress-nginx-metrics"
     labels = {
       monitoring = "prometheus-ingress-nginx"
+      "jobLabel" = "ingress-nginx"
     }
   }
 
@@ -58,6 +59,7 @@ resource "kubernetes_manifest" "ingress_nginx" {
         {
           "path" = "/metrics"
           "port" = 10254
+          "scheme" = "http"
         },
       ]
       "namespaceSelector" = {
