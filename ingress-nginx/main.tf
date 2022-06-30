@@ -62,11 +62,6 @@ resource "kubernetes_manifest" "ingress_nginx" {
           "scheme" = "http"
         },
       ]
-      "namespaceSelector" = {
-        "matchNames" = [
-          "default",
-        ]
-      }
       "selector" = {
         "matchLabels" = {
           "monitoring" = "prometheus-ingress-nginx"
