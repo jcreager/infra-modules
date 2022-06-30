@@ -67,7 +67,7 @@ resource "kubernetes_manifest" "ingress_nginx" {
       }
       "selector" = {
         "matchLabels" = {
-          "monitoring" = "promtheus-ingress-nginx"
+          "monitoring" = "prometheus-ingress-nginx"
         }
       }
     }
