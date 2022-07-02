@@ -26,6 +26,7 @@ resource "kubernetes_service" "ingress_nginx_metrics" {
     name = "ingress-nginx-metrics"
     labels = {
       monitoring = "prometheus-ingress-nginx"
+      "self-monitor" = "true"
     }
   }
 
