@@ -27,6 +27,7 @@ resource "kubernetes_service" "ingress_nginx_metrics" {
     labels = {
       monitoring = "prometheus-ingress-nginx"
       "self-monitor" = "true"
+      "release" = "kube-prometheus-stack"
     }
   }
 
@@ -51,7 +52,7 @@ resource "kubernetes_manifest" "ingress_nginx" {
     "metadata" = {
       "labels" = {
         "app" = "ingress-nginx"
-        #"jobLabel" = "ingress-nginx"
+        "release" = "kube-prometheus-stack"
       }
       "name" = "ingress-nginx-metrics"
       "namespace" = "default"
