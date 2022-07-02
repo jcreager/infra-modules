@@ -71,6 +71,7 @@ resource "kubernetes_manifest" "ingress_nginx" {
         "matchLabels" = {
           "monitoring" = "prometheus-ingress-nginx"
           "self-monitor" = "true"
+          "release" = "kube-prometheus-stack"
         }
       }
     }
