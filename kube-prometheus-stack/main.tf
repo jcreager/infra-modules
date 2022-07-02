@@ -6,7 +6,7 @@ provider "helm" {
 
 terraform {
   required_providers {
-    kubernetes = {
+    helm = {
       source = "hashicorp/helm"
       version = "~>2.6"
     }
