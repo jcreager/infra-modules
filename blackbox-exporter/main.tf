@@ -21,7 +21,7 @@ terraform {
   }
 }
 
-resource "helm_release" "certmanager" {
+resource "helm_release" "blackbox_exporter" {
   skip_crds = false
   name = "cert-manager"
   repository = "https://prometheus-community.github.io/helm-charts"
