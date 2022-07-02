@@ -62,6 +62,9 @@ resource "kubernetes_manifest" "ingress_nginx" {
           "port" = "metrics"
         },
       ]
+      "namespaceSelector" = {
+        "matchNames" = ["default"]
+      }
       "selector" = {
         "matchLabels" = {
           "monitoring" = "prometheus-ingress-nginx"
