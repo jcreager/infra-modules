@@ -31,26 +31,28 @@ resource "helm_release" "kube-prometheus-stack" {
         #    }
         #  ]
         #"extraScrapeConfigs" = var.scrape_configs
-        "job_name" = "blackbox"
-        "metrics_path" = "/probe"
-        "params" = {
-          "module" = ["http_2xx"]
-        }
-        "static_configs" = [{"targets" = var.scrape_targets}]
-        "relable_configs" = [
-          {
-            "source_labels" = ["__address__"]
-            "target_labels" = "__param_target"
-          },
-          {
-            "source_labels" = ["__param_target"]
-            "target_labels" = "instance"
-          },
-          {
-            "source_labels" = ["__address__"]
-            "target_labels" = "blackbox-exporter-prometheus-blackbox-exporter.default.svc.cluster.local:9115"
+        "extraScrapeConfigs" = {
+          "job_name" = "blackbox"
+          "metrics_path" = "/probe"
+          "params" = {
+            "module" = ["http_2xx"]
           }
-        ]
+          "static_configs" = [{"targets" = var.scrape_targets}]
+          "relable_configs" = [
+            {
+              "source_labels" = ["__address__"]
+              "target_labels" = "__param_target"
+            },
+            {
+              "source_labels" = ["__param_target"]
+              "target_labels" = "instance"
+            },
+            {
+              "source_labels" = ["__address__"]
+              "target_labels" = "blackbox-exporter-prometheus-blackbox-exporter.default.svc.cluster.local:9115"
+            }
+          ]
+        }
       }
     )
   ]
