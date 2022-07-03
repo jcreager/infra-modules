@@ -1,1 +1,1 @@
-variable "scrape_configs" {}
+#variable "scrape_configs" {}

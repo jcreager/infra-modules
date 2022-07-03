@@ -28,15 +28,3 @@ resource "helm_release" "blackbox_exporter" {
   chart = "prometheus-blackbox-exporter"
   create_namespace = true
 }
-
-resource "kubernetes_secret" "scrape_configs" {
-  metadata {
-    name = "scrape-configs"
-  }
-
-  data = {
-    "scrape-configs.yaml" = var.scrape_configs
-  }
-
-  type = "Opaque"
-}
