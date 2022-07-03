@@ -36,7 +36,7 @@ resource "helm_release" "kube-prometheus-stack" {
         "params" = {
           "module" = ["http_2xx"]
         }
-        "static_configs" = ["targets" = var.scrape_targets]
+        "static_configs" = [{"targets" = var.scrape_targets}]
         "relable_configs" = [
           {
             "source_labels" = ["__address__"]
