@@ -101,6 +101,10 @@ resource "helm_release" "ingress-nginx" {
     value = "true"
   }
   set {
+    name = "controller.service.annotations.service\\.beta\\.kubernetes\\.io\\/do-loadbalancer-hostname"
+    value = "joecreager.com"
+  }
+  set {
     name = "controller.config.use-proxy-protocol"
     value = "true"
   }
