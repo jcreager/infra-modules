@@ -30,7 +30,7 @@ resource "helm_release" "kube-prometheus-stack" {
   #      #      "hosts" = [var.grafana_host]
   #      #    }
   #      #  ]
-        "extraScrapeConfigs" = var.scrape_configs
+  {"extraScrapeConfigs" = var.scrape_configs}
   #      "extraScrapeConfigs" = [
   #        {
   #          "job_name" = "blackbox"
