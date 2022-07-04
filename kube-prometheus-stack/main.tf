@@ -19,8 +19,8 @@ resource "helm_release" "kube-prometheus-stack" {
   chart = "kube-prometheus-stack"
   create_namespace = true
   skip_crds = true
-  #values = [
-  #  yamlencode(
+  values = [
+    yamlencode(
   #    {
   #      #  "ingress.enabled" = true
   #      #  "hosts" = [var.grafana_host]
@@ -30,7 +30,7 @@ resource "helm_release" "kube-prometheus-stack" {
   #      #      "hosts" = [var.grafana_host]
   #      #    }
   #      #  ]
-  #      #"extraScrapeConfigs" = var.scrape_configs
+        "extraScrapeConfigs" = var.scrape_configs
   #      "extraScrapeConfigs" = [
   #        {
   #          "job_name" = "blackbox"
@@ -56,10 +56,10 @@ resource "helm_release" "kube-prometheus-stack" {
   #        }
   #      ]
   #    }
-  #  )
-  #]
-  set {
-    name = "extraScrapeConfigs.0"
-    value = var.scrape_configs
-  }
+    )
+  ]
+  #set {
+  #  name = "extraScrapeConfigs.0"
+  #  value = var.scrape_configs
+  #}
 }
