@@ -26,6 +26,6 @@ resource "kubernetes_config_map" "blackbox_exporter" {
   }
 
   data = {
-    "blackbox-exporter.json" = file("prometheus-blackbox-exporter_rev3.json")
+    "blackbox-exporter.json" = file("blackbox-exporter.json")
   }
 }
