@@ -29,3 +29,11 @@ resource "helm_release" "loki" {
   create_namespace = true
   skip_crds = true
 }
+
+resource "helm_release" "promtai" {
+  name = "promtail"
+  repository = "https://grafana.github.io/helm-charts"
+  chart = "promtail"
+  create_namespace = true
+  skip_crds = true
+}
