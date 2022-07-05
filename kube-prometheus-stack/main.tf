@@ -49,5 +49,9 @@ resource "helm_release" "kube-prometheus-stack" {
     name  = "prometheus.prometheusSpec.additionalScrapeConfigsSecret.key"
     value = "additional-scrape-configs.yaml"
   }
+  set {
+    name = "grafana.persistence.enabled"
+    value = true
+  }
 }
 
