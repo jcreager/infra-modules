@@ -37,7 +37,7 @@ resource "helm_release" "kube-prometheus-stack" {
   chart = "kube-prometheus-stack"
   create_namespace = true
   skip_crds = true
-    set {
+  set {
     name  = "prometheus.prometheusSpec.additionalScrapeConfigsSecret.enabled"
     value = true
   }
