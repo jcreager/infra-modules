@@ -25,7 +25,7 @@ terraform {
 resource "helm_release" "loki" {
   name = "loki"
   repository = "https://grafana.github.io/helm-charts"
-  chart = "grafana/loki"
+  chart = "loki"
   create_namespace = true
   skip_crds = true
 }
