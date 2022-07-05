@@ -29,3 +29,17 @@ resource "kubernetes_config_map" "blackbox_exporter" {
     "blackbox-exporter.json" = file("blackbox-exporter.json")
   }
 }
+
+resource "kubernetes_config_map" "loki" {
+  metadata {
+    name      = "grafana-dashboards-loki-1"
+
+    labels = {
+      grafana_dashboard = 1
+    }
+  }
+
+  data = {
+    "loki.json" = file("logging-universal-dashboard_rev1.json")
+  }
+}
