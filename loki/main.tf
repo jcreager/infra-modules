@@ -36,8 +36,21 @@ resource "helm_release" "promtai" {
   chart = "promtail"
   create_namespace = true
   skip_crds = true
-  set {
-    name = "config.clients.0.url"
-    value = "loki.default.svc.cluster.local:3100/loki/api/v1/push"
-  }
+  values = [
+    yamlencode(
+      {
+        "config" = {
+          "clients" = [
+            {
+              "url" = "loki.default.svc.cluster.local:3100/loki/api/v1/push"
+            }
+          ]
+        }
+      }
+    )
+  ]
+  #set {
+  #  name = "config.clients.0.url"
+  #  value = "loki.default.svc.cluster.local:3100/loki/api/v1/push"
+  #}
 }
