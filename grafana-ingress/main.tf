@@ -11,12 +11,12 @@ terraform {
   }
 }
 
-resource "kubernetes_ingress_v1" "wordpress" {
+resource "kubernetes_ingress_v1" "grafana" {
   metadata {
     name      = "${var.site_name}-ingress"
     namespace = "default"
     annotations = {
-      "kubernetes.io/ingress.global-static-ip-name" = "167.172.8.60" # TODO Why isn't this a variable? Use TF datasource.
+      "kubernetes.io/ingress.global-static-ip-name" = var.static_ip
       "nginx.ingress.kubernetes.io/enable-cors" = "true"
       "kubernetes.io/ingress.class" = "nginx"
       "cert-manager.io/cluster-issuer" = "letsencrypt-prod"

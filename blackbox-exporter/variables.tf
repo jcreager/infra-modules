@@ -1,1 +1,0 @@
-#variable "scrape_configs" {}
