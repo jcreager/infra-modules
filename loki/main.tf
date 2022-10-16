@@ -30,7 +30,7 @@ resource "helm_release" "loki" {
   skip_crds = true
 }
 
-resource "helm_release" "promtai" {
+resource "helm_release" "promtail" {
   name = "promtail"
   repository = "https://grafana.github.io/helm-charts"
   chart = "promtail"
@@ -49,8 +49,4 @@ resource "helm_release" "promtai" {
       }
     )
   ]
-  #set {
-  #  name = "config.clients.0.url"
-  #  value = "loki.default.svc.cluster.local:3100/loki/api/v1/push"
-  #}
 }
