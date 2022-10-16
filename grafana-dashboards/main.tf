@@ -43,17 +43,3 @@ resource "kubernetes_config_map" "loki" {
     "loki.json" = file("kubernetes-service-logs_rev1.json")
   }
 }
-
-resource "kubernetes_config_map" "loki_2" {
-  metadata {
-    name      = "grafana-dashboards-loki-2"
-
-    labels = {
-      grafana_dashboard = 1
-    }
-  }
-
-  data = {
-    "loki.json" = file("logging-universal-dashboard_rev1.json")
-  }
-}
