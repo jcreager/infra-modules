@@ -40,6 +40,6 @@ resource "kubernetes_config_map" "loki" {
   }
 
   data = {
-    "loki.json" = file("loki-dashboard_rev1.json")
+    "loki.json" = file("kubernetes-service-logs_rev1.json")
   }
 }
