@@ -178,6 +178,16 @@
   "templating": {
     "list": [
       {
+            "hide": 0,
+            "label": "datasource",
+            "name": "DS_LOKI",
+            "options": [],
+            "query": "loki",
+            "refresh": 1,
+            "regex": "",
+            "type": "datasource"
+          },
+      {
         "current": {
           "selected": false,
           "text": "",
