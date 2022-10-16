@@ -42,7 +42,7 @@ resource "helm_release" "promtai" {
         "config" = {
           "clients" = [
             {
-              "url" = "loki.default.svc.cluster.local:3100/loki/api/v1/push"
+              "url" = "http://loki.default.svc.cluster.local:3100/loki/api/v1/push"
             }
           ]
         }
