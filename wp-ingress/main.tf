@@ -16,7 +16,7 @@ resource "kubernetes_ingress_v1" "wordpress" {
     name      = "${var.site_name}-ingress"
     namespace = "default"
     annotations = {
-      "kubernetes.io/ingress.global-static-ip-name" = "167.172.8.60"
+      "kubernetes.io/ingress.global-static-ip-name" = var.static_ip
       "nginx.ingress.kubernetes.io/enable-cors" = "true"
       "kubernetes.io/ingress.class" = "nginx"
       "nginx.ingress.kubernetes.io/proxy-body-size" = "1024m"
