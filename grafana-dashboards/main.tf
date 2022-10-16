@@ -43,3 +43,17 @@ resource "kubernetes_config_map" "loki" {
     "loki.json" = file("kubernetes-service-logs_rev1.json")
   }
 }
+
+resource "kubernetes_config_map" "k8s_troubleshooting" {
+  metadata {
+    name      = "grafana-dashboards-k8s-troubleshooting-1"
+
+    labels = {
+      grafana_dashboard = 1
+    }
+  }
+
+  data = {
+    "loki.json" = file("troubleshooting-kubernetes-simple-and-fast-view_rev1.json")
+  }
+}
