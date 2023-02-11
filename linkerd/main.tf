@@ -6,6 +6,7 @@ provider "helm" {
 
 resource "helm_release" "linkerd_crds" {
   name = "linkerd-crds"
+  namespace = "linkderd"
   create_namespace = true
   repository = "https://helm.linkerd.io/stable"
   chart = "linkerd-crds"
@@ -13,7 +14,7 @@ resource "helm_release" "linkerd_crds" {
 
 resource "helm_release" "linkerd_control_plane" {
   name = "linkerd-control-plane"
-  create_namespace = true
+  namespace = "linkderd"
   repository = "https://helm.linkerd.io/stable"
   chart = "linkerd-control-plane"
   set {
@@ -35,7 +36,7 @@ resource "helm_release" "linkerd_control_plane" {
 
 resource "helm_release" "linkerd_viz" {
   name = "linkerd-viz"
-  create_namespace = true
+  namespace = "linkderd"
   repository = "https://helm.linkerd.io/stable"
   chart = "linkerd-viz"
   depends_on = [
