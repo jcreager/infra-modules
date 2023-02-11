@@ -31,3 +31,12 @@ resource "helm_release" "linkerd_control_plane" {
     helm_release.linkerd_crds
   ]
 }
+
+resource "helm_release" "linkerd_viz" {
+  name = "linkerd-viz"
+  repository = "https://helm.linkerd.io/stable"
+  chart = "linkerd-viz"
+  depends_on = [
+    helm_release.linkerd_control_plane
+  ]
+}
