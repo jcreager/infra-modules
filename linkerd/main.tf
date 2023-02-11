@@ -40,7 +40,7 @@ resource "helm_release" "linkerd_viz" {
   repository = "https://helm.linkerd.io/stable"
   chart = "linkerd-viz"
   set {
-    name = "grafana.url"
+    name = "grafana.externalUrl"
     value = var.grafana_url
   }
   depends_on = [
