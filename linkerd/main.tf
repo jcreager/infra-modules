@@ -39,6 +39,10 @@ resource "helm_release" "linkerd_viz" {
   namespace = "linkerd"
   repository = "https://helm.linkerd.io/stable"
   chart = "linkerd-viz"
+  set {
+    name = "grafana.url"
+    value = var.grafana_url
+  }
   depends_on = [
     helm_release.linkerd_control_plane
   ]
