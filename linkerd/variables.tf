@@ -7,4 +7,3 @@ variable "crt" {
 variable "key" {
   sensitive = true
 }
-variable "grafana_url" {}
